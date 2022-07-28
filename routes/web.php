@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\User\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
+
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('register', [AuthController::class, 'registerUser'])->name('register');
+
+Route::post('login', [AuthController::class, 'loginUser'])->name('login');
+// Route::group(['middleware' => ['auth']], function () {
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// });
+
 Route::any('/password/{email}/{token}', [
     AuthController::class, "resetPassword"
 ])->name('password.reset');
