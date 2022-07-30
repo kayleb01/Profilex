@@ -27,7 +27,7 @@ Route::post('login', [AuthController::class, 'loginUser'])->name('login');
 // Route::group(['middleware' => ['auth']], function () {
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 // });
-
+Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [
     AuthController::class, "resetPassword"
 ])->name('password.reset');

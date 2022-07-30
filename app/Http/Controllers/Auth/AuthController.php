@@ -43,4 +43,9 @@ class AuthController extends Controller
         }
         return back()->withErrors("Username or Password is not correct");
     }
+
+    public function forgotPassword()
+    {
+        return view('auth.forgot_password');
+    }
 }
