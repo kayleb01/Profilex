@@ -23,7 +23,7 @@
 
     <div>
         <!-- Login Section -->
-        <div class="w-full md:w-1/2 flex flex-col h-2/5 m-8 p-8 text-white mx-auto" style="background-color: #03A89E;">
+        <div class="w-full md:w-1/2 flex flex-col h-2/5 m-8 p-8 text-white mx-auto rounded-lg" style="background-color: #03A89E;">
 
             <div class="flex justify-center  pt-8 sm:-mb-24 ">
                 <!-- <a href="#" class="bg-black text-white  font-bold text-xl p-4">Logo</a> -->
@@ -33,7 +33,7 @@
 
             <div class="flex flex-col justify-center md:justify-start my-auto md:pt-0 px-8 md:px-24 lg:px-32">
                 @include('partials.error-success')
-                <form class="flex flex-col pt-3 md:pt-8 mt-10" method="POST" method="{{route('login')}}">
+                <form class="flex flex-col pt-3 md:pt-8 mt-10 pb-8" method="POST" method="{{route('login')}}">
                     @csrf
                     <div class="flex flex-col pt-4">
                         <label for="email" class="text-lg">Enter Address</label>
