@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,9 +25,11 @@ Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'registerUser'])->name('register');
 
 Route::post('login', [AuthController::class, 'loginUser'])->name('login');
-// Route::group(['middleware' => ['auth']], function () {
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-// });
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('profile/edit', [ProfileController::class, 'update'])->name('profile.edit');
+});
 Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [
     AuthController::class, "resetPassword"

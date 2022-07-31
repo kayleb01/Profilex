@@ -1,13 +1,13 @@
-<div class="mx-auto">
+<div class="">
     @if ($message = Session::get('success'))
-        <div class="bg-green-500 p-6 m-2 text-white rounded-sm">
+        <div class="bg-green-500 p-4 m-2 text-white rounded-sm border border-white">
             {{$message}}
         </div>
     @endif
 
 
     @if ($message = Session::get('error'))
-        <div class="bg-red-500 text-white p-6 rounded-sm m-2">
+        <div class="bg-red-500 text-white p-4 rounded-sm m-2">
             {{$message}}
         </div>
     @endif
@@ -33,7 +33,7 @@
     </div>
     @endif
     @if ($errors->any())
-    <div class="bg-red-500 text-white p-6 m-2 rounded-sm">
+    <div class="bg-red-500 text-white p-4 m-2 rounded-sm">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
