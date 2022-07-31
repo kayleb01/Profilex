@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'registerUser'])->name('register');
+Route::post('register', [AuthController::class, 'registerUser'])->name('register');
 
 Route::post('login', [AuthController::class, 'loginUser'])->name('login');
 Route::group(['middleware' => ['auth']], function () {

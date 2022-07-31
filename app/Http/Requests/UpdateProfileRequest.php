@@ -24,8 +24,8 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullname' => 'string',
-            'country' => 'string'
+            'fullname' => 'required|string',
+            'country' => 'nullable|string'
         ];
     }
 }

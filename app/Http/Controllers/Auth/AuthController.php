@@ -48,4 +48,9 @@ class AuthController extends Controller
     {
         return view('auth.forgot_password');
     }
+
+    public function resetPassword()
+    {
+        return view('auth.reset_password');
+    }
 }
