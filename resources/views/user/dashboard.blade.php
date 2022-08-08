@@ -135,7 +135,7 @@
 
     {{-- Traffic charts --}}
       <div
-        class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
+        class="min-w-0 lg:h-1/2 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
       >
         <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
           No. of Visitors

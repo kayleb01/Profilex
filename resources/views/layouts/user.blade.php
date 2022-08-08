@@ -200,34 +200,14 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="#l"
-              >
-                <svg
-                  class="w-5 h-5 text-white"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                </svg>
-                <span class="ml-4 text-white">Settings</span>
-              </a>
-            </li>
-            <li class="relative px-6 py-3">
-              <button
+                <button
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 @click="togglePagesMenu"
                 aria-haspopup="true"
               >
-                <span class="inline-flex items-center">
+                <span class="inline-flex items-center text-white">
                   <svg
-                    class="w-5 h-5 text-white"
+                    class="w-5 h-5"
                     aria-hidden="true"
                     fill="none"
                     stroke-linecap="round"
@@ -240,10 +220,10 @@
                       d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
                     ></path>
                   </svg>
-                  <span class="ml-4 text-white">Agency</span>
+                  <span class="ml-4 text-white">Settings</span>
                 </span>
                 <svg
-                  class="w-4 h-4"
+                  class="w-4 h-4 text-white"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -269,31 +249,21 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/login.html">Login</a>
+                    <a class="w-full" href="{{route('business-name')}}">Name Generator</a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/create-account.html">
-                      Create account
+                    <a class="w-full" href="#">
+                      QRcode Generator
                     </a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/forgot-password.html">
-                      Forgot password
+                    <a class="w-full" href="#">
+                     Vcard Generator
                     </a>
-                  </li>
-                  <li
-                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                  >
-                    <a class="w-full" href="pages/404.html">404</a>
-                  </li>
-                  <li
-                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                  >
-                    <a class="w-full" href="pages/blank.html">Blank</a>
                   </li>
                 </ul>
               </template>
