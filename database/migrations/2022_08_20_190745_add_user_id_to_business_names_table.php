@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBusinessNameTable extends Migration
+class AddUserIdToBusinessNamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateBusinessNameTable extends Migration
      */
     public function up()
     {
-        Schema::create('business_names', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('business_names', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->afer('name');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateBusinessNameTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('business_names');
+        Schema::table('business_names', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
     }
 }

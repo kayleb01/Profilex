@@ -231,5 +231,5 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    'business_name_api' => env('BUSINESS_NAME_API')
 ];

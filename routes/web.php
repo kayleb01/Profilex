@@ -31,8 +31,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('profile/edit', [ProfileController::class, 'update'])->name('profile.edit');
+
+    /** Business name generator */
     Route::get('business-name', [BusinessNameController::class, 'index'])->name('business-name');
     Route::get('create/business-name', [BusinessNameController::class, 'createBusinessName'])->name('create.business-name');
+    Route::get('generate-business-names', [BusinessNameController::class, 'generateName'])->name('generate-business-name');
+    Route::post('save-business-name', [BusinessNameController::class, 'store'])->name('save-name');
+    Route::delete('business-name/{business}/delete', [BusinessNameController::class, 'destroy'])->name('delete-name');
 });
 Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [
