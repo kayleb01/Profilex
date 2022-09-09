@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\User\BusinessNameController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('generate-business-names', [BusinessNameController::class, 'generateName'])->name('generate-business-name');
     Route::post('save-business-name', [BusinessNameController::class, 'store'])->name('save-name');
     Route::delete('business-name/{business}/delete', [BusinessNameController::class, 'destroy'])->name('delete-name');
+
+    /** User Templates */
+    Route::get('user-templates', [TemplateController::class, 'index'])->name('user.templates');
 });
 Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [
