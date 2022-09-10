@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DomainController;
 use App\Http\Controllers\User\BusinessNameController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProfileController;
@@ -45,6 +46,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::any('/user/pages/{id}/build', [TemplateController::class, 'build'])->name('pagebuilder.build');
     Route::any('/user/pages', [TemplateController::class, 'build']);
     Route::get('user/pages/add', [TemplateController::class, 'addPage'])->name('user.pages-add');
+
+    Route::get('user/agency', [DomainController::class, 'agency'])->name('user.agency');
+    Route::get('user/seo', [DomainController::class, 'seo_wiz'])->name('user.seo');
+    Route::get('user/custom-domain', [DomainController::class, 'customDomain'])->name('user.custom-domain');
+    Route::get('user/sub-domain', [DomainController::class, 'subDomain'])->name('user.sub-domain');
+    Route::get('user/pwa', [DomainController::class, 'pwa'])->name('user.pwa');
 });
 Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [
