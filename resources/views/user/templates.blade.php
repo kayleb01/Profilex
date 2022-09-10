@@ -3,7 +3,7 @@
 @section('content')
 <div class=" py-6 flex flex-col justify-center sm:py-12 bg-white">
   <div class=" flex flex-row justify-between px-10 mb-10 text-lg text-semibold text-center " >
-    <div class="px-10 py-4  " style="background-color:rgba(3, 168, 158, 1) ;">Templates</div>
+    <a  href="{{route('user.pages-add')}}" class="px-10 py-4 font-semibold text-white" style="background-color:rgba(3, 168, 158, 1) ;">  Add Page</a>
     <div class=" ">Select a template to get started!
     </div>
   </div>
@@ -28,7 +28,6 @@
               </a>
           </div>
           <div class=" ">
-
               <div class=" grid grid-cols-3 gap-6 w-full" x-show="tab === 1">
                 <div class="  overflow-hidden rounded-lg bg-white  shadow-md ">
                   <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" alt="">

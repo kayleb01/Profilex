@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class TemplateController extends Controller
 {
     public function index()
     {
-        return view('user.templates');
+        $pages = Page::query()
+            ->paginate(30);
+
+        return view('user.templates', [
+            'pages' => $pages
+        ]);
     }
 
         /**

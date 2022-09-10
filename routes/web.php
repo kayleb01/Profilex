@@ -43,9 +43,15 @@ Route::group(['middleware' => ['auth']], function () {
     /** User Templates */
     Route::get('user-templates', [TemplateController::class, 'index'])->name('user.templates');
     Route::any('/user/pages/{id}/build', [TemplateController::class, 'build'])->name('pagebuilder.build');
-    Route::any('/user/pages/build', [TemplateController::class, 'build']);
+    Route::any('/user/pages', [TemplateController::class, 'build']);
+    Route::get('user/pages/add', [TemplateController::class, 'addPage'])->name('user.pages-add');
 });
 Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [
     AuthController::class, "resetPassword"
 ])->name('password.reset');
+
+Route::any('{uri}', [
+    'uses' => 'App\Http\Controllers\WebsiteController@uri',
+    'as' => 'page',
+])->where('uri', '.*');
