@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     /** User Templates */
     Route::get('user-templates', [TemplateController::class, 'index'])->name('user.templates');
+    Route::any('/user/pages/{id}/build', [TemplateController::class, 'build'])->name('pagebuilder.build');
+    Route::any('/user/pages/build', [TemplateController::class, 'build']);
 });
 Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [
