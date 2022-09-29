@@ -5,6 +5,7 @@ use App\Http\Controllers\DomainController;
 use App\Http\Controllers\User\BusinessNameController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\QrCodeController;
 use App\Http\Controllers\User\TemplateController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('user/custom-domain', [DomainController::class, 'customDomain'])->name('user.custom-domain');
     Route::get('user/sub-domain', [DomainController::class, 'subDomain'])->name('user.sub-domain');
     Route::get('user/pwa', [DomainController::class, 'pwa'])->name('user.pwa');
+
+    Route::get('user/qrcodes', [QrCodeController::class, 'index'])->name('qrcode.index');
+    Route::get('user/qrcodes/generate', [QrCodeController::class, 'generate'])->name('qrcode.generate');
+    Route::post('user/qrcode/generate', [QrCodeController::class, 'generateQrcode'])->name('user.qrcode.generate');
 });
 Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [

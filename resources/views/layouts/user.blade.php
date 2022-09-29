@@ -309,7 +309,7 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="#">
+                    <a class="w-full" href="{{route('qrcode.index')}}">
                       QRcode Generator
                     </a>
                   </li>
@@ -805,6 +805,8 @@
           </main>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     @yield('page-js')
+
     </body>
 </html>
