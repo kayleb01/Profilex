@@ -12,7 +12,7 @@
                      <div class="pt-4  w-full flex flex-col">
                         <label for="url" class="text-lg font-semibold">URL**</label>
                         <input type="url" name="url" id="url" placeholder="https://something.com"
-                            class="shadow rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline @error('email') border border-red-500 @enderror"
+                            class="shadow rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline @error('url') border border-red-500 @enderror"
                             >
                     </div>
                     <div class="pt-4 w-full flex flex-col">
@@ -68,7 +68,7 @@
                    </select>
                 </div> <div id="type-image" class="types block">
                     <div class="form-group">
-                        <div class="col-12 mb-2">
+                        <div class="col-12 mb-2 mt-5">
                             <label for="image"><strong> Image</strong></label>
                         </div>
                         <div class="col-md-12 showImage mb-3">
@@ -94,27 +94,26 @@
                     </div>
                 </div>
                 <div id="type-text" class="types block">
-                    <div class="form-group w-full flex flex-col">
+                    <div class="form-group w-full flex flex-col mt-4">
                         <label>Text</label>
-                        <input type="text" name="text" value="" class="form-control" onchange="generateQr()">
+                        <input type="text" name="text" value="" class="shadow rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline @error('text') border border-red-500 @enderror" onchange="generateQr()">
                     </div>
                     <div class="form-group w-full flex flex-col">
                         <label>Text Color</label>
-
-                        <input type="text" name="text_color" value="" class="form-control jscolor" onchange="generateQr()">
+                        <input type="color" name="text_color" value="" class="form-control jscolor w-full" onchange="generateQr()">
                     </div>
-                    <div class="form-group w-full flex flex-col">
+                    <div class="form-group w-full flex flex-col mt-4">
                         <label for="">Text Size</label>
                         <input class="form-control p-0 range-slider" name="text_size" type="range" min="1" max="15" value="" onchange="generateQr()">
                         <span class="text-dark size-text float-right d-block"></span>
                         <p class="mb-0 text-warning">If the QR Code cannnot be scanned, then reduce this size</p>
                     </div>
-                    <div class="form-group w-full flex flex-col">
+                    <div class="form-group w-full flex flex-col mt-4">
                         <label for="">Text Horizontal Poistion</label>
                         <input class="form-control p-0 range-slider" name="text_x" type="range" min="0" max="100" value="" onchange="generateQr()">
                         <span class="text-dark size-text float-right"></span>
                     </div>
-                    <div class="form-group w-full flex flex-col">
+                    <div class="form-group w-full flex flex-col mt-4">
                         <label for="">Text Vertical Position</label>
                         <input class="form-control p-0 range-slider" name="text_y" type="range" min="0" max="100" value="" onchange="generateQr()">
                         <span class="text-dark size-text float-right"></span>
@@ -147,15 +146,14 @@
 <script>
      function loadDiv(type) {
       $(".types").removeClass('block');
-      $(".types").addClass('none');
-      $("#" + "type-" + type).removeClass("none");
+      $(".types").addClass('hidden');
+      $("#" + "type-" + type).removeClass("hidden");
       $("#" + "type-" + type).addClass("block");
     }
 
     $(document).ready(function() {
       let type = $("select[name='type']").val();
       loadDiv(type);
-        console.log(type)
       $(".range-slider").on("input", function() {
           $(this).next(".size-text").html($(this).val());
       });
@@ -172,6 +170,8 @@
         fd.append('image_size', $("input[name='image_size']").val());
         fd.append('image_x', $("input[name='image_x']").val());
         fd.append('image_y', $("input[name='image_y']").val());
+        fd.append('_token', "{{csrf_token()}}");
+
         if ($("select[name='type']").val() == 'text') {
         $("#text-size").text($("input[name='text']").val());
         let fontSize = ($("input[name='size']").val() * $("input[name='text_size']").val()) / 100;
@@ -189,15 +189,21 @@
             contentType: false,
             processData: false,
             success: function(data) {
-            $(".request-loader").removeClass('show');
+            $(".request-loader").removeClass('block');
             $(".range-slider").attr('disabled', false);
 
             if(data == "url_empty") {
-                bootnotify("URL field cannot be empty", "Warning", "warning");
+                toastr.error("URL field cannot be empty", "Warning", "warning");
             } else {
                 $("#preview").attr('src', data);
                 $("#downloadBtn").attr('href', data);
             }
+
+            },
+            error: function (error) {
+                if (error.status === 422) {
+                    alert(error.responseJSON.message)
+                }
 
             }
     });

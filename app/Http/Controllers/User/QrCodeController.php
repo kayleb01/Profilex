@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GenerateQrRequest;
 use App\Models\Qrcode;
 use Illuminate\Http\Request;
 use Image;
-use PHPageBuilder\Setting;
 
 class QrCodeController extends Controller
 {
@@ -23,6 +23,7 @@ class QrCodeController extends Controller
 
     public function generateQrcode(Request $request)
     {
+        // dd($request);
         if (!$request->filled('url')) {
             return "url_empty";
         }
