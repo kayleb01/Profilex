@@ -12,7 +12,10 @@ class QrCodeController extends Controller
 {
     public function index()
     {
-        return view('user.qrcode.index');
+        $qrcodes = Qrcode::where('user_id', auth()->id())->paginate(30);
+        return view('user.qrcode.index', [
+            'qrcodes' => $qrcodes
+        ]);
     }
 
     public function generate()
@@ -73,29 +76,11 @@ class QrCodeController extends Controller
                 $qr->insert($logo, 'top-left', (int) (((($qrSize - $logoWidth) * $request->image_x) / 100)), (int) (((($qrSize - $logoHeight) * $request->image_y) / 100)));
                 $qr->save($directory . $qrImage);
             }
-            // else {
-            //     if (!empty($bs->qr_inserted_image) && file_exists('./' . $directory . $bs->qr_inserted_image)) {
-            //         $qr = Image::make($directory . $qrImage);
-            //         $logo = Image::make($directory . $bs->qr_inserted_image);
-            //         $logo->resize(null, $insertedImgSize, function ($constraint) {
-            //             $constraint->aspectRatio();
-            //         });
-
-            //         $logoWidth = $logo->width();
-            //         $logoHeight = $logo->height();
-
-            //         $qr->insert($logo, 'top-left', (int) (((($qrSize - $logoWidth) * $request->image_x) / 100)), (int) (((($qrSize - $logoHeight) * $request->image_y) / 100)));
-
-            //         $qr->save($directory . $qrImage);
-            //     }
-            // }
         }
 
         if ($type == 'text') {
             $imageSize = $request->text_size;
             $insertedImgSize = ($qrSize * $imageSize) / 100;
-            // dd($request->color);
-            // dd($request->text_width, $insertedImgSize, $request->text);
             $logo = Image::canvas($request->text_width, $insertedImgSize, "#ffffff")->text($request->text, 0, 0, function ($font) use ($request, $insertedImgSize) {
                 $font->file(public_path('assets/fonts/Lato-Regular.ttf'));
                 $font->size($insertedImgSize);
@@ -120,50 +105,28 @@ class QrCodeController extends Controller
     public function save(Request $request)
     {
         $rules = [
-            'name' => 'required|max:255'
+            'name' => 'required|max:255',
+            'qr_url' => 'required|string'
         ];
 
         $request->validate($rules);
 
-        // $bs = Setting::where('user_id', Auth::user()->id)->first();
-
         $qrcode = new QrCode();
-        $qrcode->user_id = Auth::user()->id;
-        $qrcode->name = $request->name;
-        $qrcode->image = $bs->qr_image;
-        $qrcode->url = $bs->qr_url;
+        $qrcode->user_id = auth()->id();
+        $qrcode->image = $request->name;
+        $qrcode->url = $request->qr_url;
         $qrcode->save();
-
-        // $this->clearFilters($bs);
 
         \Session::flash('success', 'QR Code saved successfully!');
         return back();
     }
 
-    public function clearFilters($bs, $type = null)
+    public function delete($id)
     {
-        @unlink('assets/front/img/user/qr/' . $bs->qr_inserted_image);
-        if ($type == 'clear') {
-            @unlink('assets/front/img/user/qr/' . $bs->qr_image);
-        }
+        $qrcode = QrCode::where('user_id', auth()->id())->where('id', $id)->firstOrFail();
+        @unlink($qrcode->image);
+        $qrcode->delete();
 
-        $bs->qr_image = null;
-        $bs->qr_color = '000000';
-        $bs->qr_size = 250;
-        $bs->qr_style = 'square';
-        $bs->qr_eye_style = 'square';
-        $bs->qr_margin = 0;
-        $bs->qr_text = null;
-        $bs->qr_text_color = '000000';
-        $bs->qr_text_size = 15;
-        $bs->qr_text_x = 50;
-        $bs->qr_text_y = 50;
-        $bs->qr_inserted_image = null;
-        $bs->qr_inserted_image_size = 20;
-        $bs->qr_inserted_image_x = 50;
-        $bs->qr_inserted_image_y = 50;
-        $bs->qr_type = 'default';
-        $bs->qr_url = null;
-        $bs->save();
+        return redirect()->back()->with('success', 'QR Code deleted successfully!');
     }
 }

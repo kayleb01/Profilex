@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('user/qrcodes', [QrCodeController::class, 'index'])->name('qrcode.index');
     Route::get('user/qrcodes/generate', [QrCodeController::class, 'generate'])->name('qrcode.generate');
     Route::post('user/qrcode/generate', [QrCodeController::class, 'generateQrcode'])->name('user.qrcode.generate');
+    Route::post('user/qrcode/save', [QrCodeController::class, 'save'])->name('save.qrcode');
+    Route::delete('user/qrcode/{id}/delete', [QrCodeController::class, 'delete'])->name('delete.qrcode');
 });
 Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [

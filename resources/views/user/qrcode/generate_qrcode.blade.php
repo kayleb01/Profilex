@@ -54,7 +54,7 @@
                        >
                             <option disabled selected>select style</option>
                             <option value="square">Square</option>
-                            <option value="round">Round</option>
+                            <option value="circle">Circle</option>
                        </select>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                 <span class="pt-3 justify-start inline text-xl">Preview</span>
                 <div class=" justify-end inline">
                     <a href="#" class="border text-white font-semibold justify-end px-5 py-1 pt-3 bg-blue-300 rounded float-right">Clear</a>
-                    <a href="#" class="border text-white font-semibold justify-end px-5 py-1 pt-3 bg-green-300 rounded float-right">Save</a>
+                    <a href="#" class="border text-white font-semibold justify-end px-5 py-1 pt-3 bg-green-300 rounded float-right" onclick="toggleModal()">Save</a>
                 </div>
             </div>
             <div class="border-t-2 border-b-2 border-t-gray-500 ">
@@ -141,10 +141,36 @@
     </div>
 </div>
 
+<div class="fixed z-10 overflow-y-auto top-0 w-full left-0 hidden" id="modal">
+    <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 transition-opacity">
+        <div class="absolute inset-0 bg-gray-900 opacity-75" ></div>
+      </div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+      <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <form action="{{route('save.qrcode')}}" method="POST">
+                @csrf
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <label>Name <span class="text-red-400">*</span></label>
+                    <input type="text" class="w-full bg-blue-100 p-2 mt-2 mb-3" name="name"/>
+                  </div>
+                  <input type="hidden" name="qr_url" value="" id="qr_url">
+                  <div class="bg-gray-200 px-4 py-3 text-right">
+                    <button type="button" class="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-700 mr-2" onclick="toggleModal()"><i class="fas fa-times"></i> Cancel</button>
+                    <button type="submit" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-700 mr-2"><i class="fas fa-plus"></i>Save</button>
+                  </div>
+            </form>
+      </div>
+    </div>
+</div>
+
 @endsection
 
 @section('page-js')
 <script>
+    function toggleModal() {
+        document.getElementById('modal').classList.toggle('hidden')
+    }
      function loadDiv(type) {
       $(".types").removeClass('block');
       $(".types").addClass('hidden');
@@ -197,9 +223,9 @@
                 toastr.error("URL field cannot be empty", "Warning", "warning");
             } else {
                 $("#preview").attr('src', data);
+                $('#qr_url').attr('value', data);
                 $("#downloadBtn").attr('href', data);
             }
-
             },
             error: function (error) {
                 if (error.status === 422) {
