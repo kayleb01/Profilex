@@ -137,6 +137,7 @@
                 <a href="#"  class="bg-green-300 rounded px-5 py-2 text-white text-xl font-semibold pt-3" id="downloadBtn">Download</a>
             </div>
         </div>
+        <span id="text-size" style="visibility: hidden;">{{config('app.name')}}</span>
     </div>
 </div>
 
@@ -180,7 +181,7 @@
         fd.append('text_width', textWidth);
         }
 
-        $(".range-slider").attr('disabled', true);
+        // $(".range-slider").attr('disabled', true);
 
         $.ajax({
             url: "{{route('user.qrcode.generate')}}",

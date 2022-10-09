@@ -94,11 +94,12 @@ class QrCodeController extends Controller
         if ($type == 'text') {
             $imageSize = $request->text_size;
             $insertedImgSize = ($qrSize * $imageSize) / 100;
-
+            // dd($request->color);
+            // dd($request->text_width, $insertedImgSize, $request->text);
             $logo = Image::canvas($request->text_width, $insertedImgSize, "#ffffff")->text($request->text, 0, 0, function ($font) use ($request, $insertedImgSize) {
-                $font->file(public_path('../../assets/fonts/Lato-Regular.ttf'));
+                $font->file(public_path('assets/fonts/Lato-Regular.ttf'));
                 $font->size($insertedImgSize);
-                $font->color('#' . $request->text_color);
+                $font->color($request->text_color);
                 $font->align('left');
                 $font->valign('top');
             });
@@ -114,33 +115,7 @@ class QrCodeController extends Controller
         }
 
 
-        $bs->qr_color = $request->color;
-        $bs->qr_size = $request->size;
-        $bs->qr_style = $request->style;
-        $bs->qr_eye_style = $request->eye_style;
-        $bs->qr_image = $qrImage;
-        $bs->qr_type = $type;
 
-        if ($type == 'image') {
-            if ($request->hasFile('image')) {
-                $bs->qr_inserted_image = $mergedImage;
-            }
-            $bs->qr_inserted_image_size = $imageSize;
-            $bs->qr_inserted_image_x = $request->image_x;
-            $bs->qr_inserted_image_y = $request->image_y;
-        }
-
-        if ($type == 'text' && !empty($request->text)) {
-            $bs->qr_text = $request->text;
-            $bs->qr_text_color = $request->text_color;
-            $bs->qr_text_size = $request->text_size;
-            $bs->qr_text_x = $request->text_x;
-            $bs->qr_text_y = $request->text_y;
-        }
-
-        $bs->qr_margin = $request->margin;
-        $bs->qr_url = $request->url;
-        $bs->save();
 
         return url($directory . $qrImage);
     }
