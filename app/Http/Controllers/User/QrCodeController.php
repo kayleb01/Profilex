@@ -114,9 +114,6 @@ class QrCodeController extends Controller
             $qr->save($directory . $qrImage);
         }
 
-
-
-
         return url($directory . $qrImage);
     }
 
