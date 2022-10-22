@@ -8,6 +8,9 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -775,7 +778,7 @@
                       <li class="flex">
                         <a
                           class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                          href="#"
+                          href="{{route('logout')}}"
                         >
                           <svg
                             class="w-4 h-4 mr-3"
@@ -791,7 +794,7 @@
                               d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                             ></path>
                           </svg>
-                          <span>Log out</span>
+                         <span>Log out</span>
                         </a>
                       </li>
                     </ul>
@@ -829,7 +832,14 @@
             "toastClass": "toaster"
         }
     </script>
-
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if (!navigator.serviceWorker.controller) {
+            navigator.serviceWorker.register("/sw.js").then(function (reg) {
+                console.log("Service worker has been registered for scope: " + reg.scope);
+            });
+        }
+    </script>
     @yield('page-js')
 
     </body>

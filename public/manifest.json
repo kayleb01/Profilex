@@ -1,0 +1,17 @@
+{
+    "name": "SiteWings",
+    "short_name": "SW",
+    "start_url": "/index.php",
+    "background_color": "#6777ef",
+    "description": "A SiteWings project",
+    "display": "fullscreen",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "assets/images/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "SiteWings"
+        }
+    ]
+}
