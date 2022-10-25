@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::any('/user/pages/{id}/build', [TemplateController::class, 'build'])->name('pagebuilder.build');
     Route::any('/user/pages', [TemplateController::class, 'build']);
     Route::get('user/pages/add', [TemplateController::class, 'addPage'])->name('user.pages-add');
+    Route::post('user/pages/niche', [TemplateController::class, 'getTemplates'])->name('user.niche.templates');
 
     Route::get('user/agency', [DomainController::class, 'agency'])->name('user.agency');
     Route::get('user/seo', [DomainController::class, 'seo_wiz'])->name('user.seo');

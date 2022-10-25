@@ -18,6 +18,15 @@ class TemplateController extends Controller
         ]);
     }
 
+    public function getTemplates(Request $request)
+    {
+        $pages = Page::query()
+            ->where('niche', $request->niche)
+            ->get();
+
+        return response()->json($pages);
+    }
+
         /**
      * Edit the given page with the page builder.
      *

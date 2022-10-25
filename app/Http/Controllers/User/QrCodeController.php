@@ -94,7 +94,6 @@ class QrCodeController extends Controller
 
             $qr = Image::make($directory . $qrImage);
 
-            // use callback to define details
             $qr->insert($logo, 'top-left', (int) (((($qrSize - $logoWidth) * $request->text_x) / 100)), (int) (((($qrSize - $logoHeight) * $request->text_y) / 100)));
             $qr->save($directory . $qrImage);
         }
@@ -117,8 +116,7 @@ class QrCodeController extends Controller
         $qrcode->url = $request->qr_url;
         $qrcode->save();
 
-        \Session::flash('success', 'QR Code saved successfully!');
-        return back();
+        return redirect()->back()->with('success', 'QR Code saved successfully!');
     }
 
     public function delete($id)
