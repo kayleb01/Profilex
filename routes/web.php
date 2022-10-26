@@ -7,6 +7,7 @@ use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\QrCodeController;
 use App\Http\Controllers\User\TemplateController;
+use App\Http\Controllers\User\VcardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,6 +62,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('user/qrcode/generate', [QrCodeController::class, 'generateQrcode'])->name('user.qrcode.generate');
     Route::post('user/qrcode/save', [QrCodeController::class, 'save'])->name('save.qrcode');
     Route::delete('user/qrcode/{id}/delete', [QrCodeController::class, 'delete'])->name('delete.qrcode');
+
+    Route::get('user/vcards/create', [VcardController::class, 'create'])->name('user.vcard.create');
+    Route::get('user/vcards', [VcardController::class, 'index'])->name('user.vcards');
 });
 Route::get('password/reset', [AuthController::class, 'forgotPassword'])->name('password.forgot');
 Route::any('/password/{email}/{token}', [
