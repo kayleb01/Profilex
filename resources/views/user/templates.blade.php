@@ -105,7 +105,7 @@
                                         </path>
                                     </svg>
                                 </a>
-                                <a href="/user/pages/${value.id}/builds" class="m-4">
+                                <a href="/user/pages/${value.id}/build" class="m-4">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </td>
