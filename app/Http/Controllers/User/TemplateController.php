@@ -21,6 +21,7 @@ class TemplateController extends Controller
     public function getTemplates(Request $request)
     {
         $pages = Page::query()
+            ->with('translate:id,page_id,route')
             ->where('niche', $request->niche)
             ->get();
 

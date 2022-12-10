@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Page extends Model
+class PageTranslation extends Model
 {
     use HasFactory;
-
-    public function translate()
-    {
-        return $this->hasOne(PageTranslation::class);
-    }
 }

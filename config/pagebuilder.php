@@ -49,7 +49,7 @@ return [
      |
      */
     'auth' => [
-        'use_login' => false,
+        'use_login' => true,
         'class' => PHPageBuilder\Modules\Auth\Auth::class,
         'url' => '/admin/login',
         'username' => 'admin',
@@ -65,7 +65,7 @@ return [
      |
      */
     'website_manager' => [
-        'use_website_manager' => false,
+        'use_website_manager' => true,
         'class' => PHPageBuilder\Modules\WebsiteManager\WebsiteManager::class,
         'url' => '/admin'
     ],
@@ -94,7 +94,7 @@ return [
         'class' => PHPageBuilder\Modules\GrapesJS\PageBuilder::class,
         'url' => '/user/pages/build',
         'actions' => [
-            'back' => '/user/pages'
+            'back' => '/user-templates'
         ]
     ],
 
